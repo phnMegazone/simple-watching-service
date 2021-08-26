@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity PtLvNodeInfo.
+    -->
+    <changeSet id="20210720084211-1" author="mega">
+        <createTable tableName="pt_lv_node_info">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="sub_node_cd" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_pt_lv_node_info__sub_node_cd" />
+            </column>
+            <column name="sub_node_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="sub_node_ip_1" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="sub_node_ip_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="stb_play_ip_1" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="stb_play_ip_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="service_yn" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="use_yn" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="storage_size" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="sub_node_port_1" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="sub_node_port_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="stb_play_ip_3" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="node_prior" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="node_level" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="initial_yn" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="cdn_policy" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_pt_lv_node_info__cdn_policy" />
+            </column>
+            <column name="cdn_local_typ" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="cdn_near_typ" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="cdn_center_typ" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="exception_flag" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="node_trans_yn" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="cm_node_yn" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="time_node_yn" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="node_group" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="ipv_6_flag_1" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="ipv_6_flag_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="ipv_6_flag_3" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="ipv_6_play_ip_1" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="ipv_6_play_ip_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="ipv_6_play_ip_3" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="chnl_service_yn" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+        </createTable>
+    </changeSet>
+
+
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+    -->
+    <changeSet id="20210720084211-1-data" author="mega" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/pt_lv_node_info.csv"
+                  separator=";"
+                  tableName="pt_lv_node_info">
+            <column name="id" type="numeric"/>
+            <column name="sub_node_cd" type="string"/>
+            <column name="sub_node_name" type="string"/>
+            <column name="sub_node_ip_1" type="string"/>
+            <column name="sub_node_ip_2" type="string"/>
+            <column name="stb_play_ip_1" type="string"/>
+            <column name="stb_play_ip_2" type="string"/>
+            <column name="service_yn" type="string"/>
+            <column name="use_yn" type="string"/>
+            <column name="storage_size" type="numeric"/>
+            <column name="sub_node_port_1" type="string"/>
+            <column name="sub_node_port_2" type="string"/>
+            <column name="stb_play_ip_3" type="string"/>
+            <column name="node_prior" type="string"/>
+            <column name="node_level" type="string"/>
+            <column name="initial_yn" type="string"/>
+            <column name="cdn_policy" type="string"/>
+            <column name="cdn_local_typ" type="string"/>
+            <column name="cdn_near_typ" type="string"/>
+            <column name="cdn_center_typ" type="string"/>
+            <column name="exception_flag" type="string"/>
+            <column name="node_trans_yn" type="string"/>
+            <column name="cm_node_yn" type="string"/>
+            <column name="time_node_yn" type="string"/>
+            <column name="node_group" type="string"/>
+            <column name="ipv_6_flag_1" type="string"/>
+            <column name="ipv_6_flag_2" type="string"/>
+            <column name="ipv_6_flag_3" type="string"/>
+            <column name="ipv_6_play_ip_1" type="string"/>
+            <column name="ipv_6_play_ip_2" type="string"/>
+            <column name="ipv_6_play_ip_3" type="string"/>
+            <column name="chnl_service_yn" type="string"/>
+
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

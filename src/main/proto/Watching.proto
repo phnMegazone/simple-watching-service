@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package grpc.common;
+
+option java_package = "com.fleta.watchingservice.grpc.common";
+option java_multiple_files = true;
+
+message WatchingInput1 {
+    string cHjdongNo = 1;
+}
+
+message WatchingOutput1 {
+    string stbPlayIp1 = 1;
+    string cdnLocalTyp = 2;
+    string ipv6PlayIp = 3;
+}
+
+message WatchingInput2 {
+    string cSaId = 1;
+    int32 pIdxSa = 2;
+}
+
+message WatchingOutput2 {
+    string adiAlbumId = 1;
+    string watchDate = 2;
+}
+
+service WatchingService {
+    rpc nxvod211TobeSql00901(WatchingInput1) returns (stream WatchingOutput1);
+
+    rpc nxvod211TobeSql01801(WatchingInput2) returns (stream WatchingOutput2);
+}
