@@ -10,7 +10,6 @@ import com.fleta.watchingservice.port.CommonRepository;
 import com.fleta.watchingservice.port.WatchingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,8 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class WatchingServiceImpl implements WatchingService {
 
-        private final CommonRepository commonRepository;
-//    private final JdbcWatchingRepository jdbcWatchingRepository;
+    private final CommonRepository commonRepository;
 
     public WatchingServiceImpl(CommonRepository commonRepository) {
         this.commonRepository = commonRepository;

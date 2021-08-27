@@ -6,8 +6,6 @@ import com.fleta.watchingservice.domain.dto.WatchingDto1;
 import com.fleta.watchingservice.domain.dto.WatchingDto2;
 import com.fleta.watchingservice.port.CommonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -18,14 +16,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Repository
-//@ConditionalOnProperty(name="repository-type", havingValue = "redis")
 public class RedisRepository implements CommonRepository {
 
     private final JdbcWatchingRepository jdbcWatchingRepository;
     private final RedisTemplate<String, String> redisTemplate;
-
-    private final String KEY_PREFIX_009_01 = "Sql009_01:";
-    private final String KEY_PREFIX_018_01 = "Sql018_01:";
+    private final String KEY_PREFIX_009_01 = "WatchingSql009_01:";
+    private final String KEY_PREFIX_018_01 = "WatchingSql018_01:";
 
     @Autowired
     public RedisRepository(JdbcWatchingRepository jdbcWatchingRepository, RedisTemplate<String, String> redisTemplate) {
@@ -50,9 +46,9 @@ public class RedisRepository implements CommonRepository {
 
     @Override
     public List<WatchingDto2> nxvod211TobeSql01801(String cSaId, int pIdxSa) {
-        List<WatchingDto2> dto2s = getFromRedisNxvod211TobeSql01801(cSaId, pIdxSa);
-        if (!dto2s.isEmpty()) {
-            return dto2s;
+        List<WatchingDto2> dto2 = getFromRedisNxvod211TobeSql01801(cSaId, pIdxSa);
+        if (!dto2.isEmpty()) {
+            return dto2;
         }
         List<WatchingDto2> fetchData = jdbcWatchingRepository.nxvod211TobeSql01801(cSaId, pIdxSa);
         // TODO: should run on background
@@ -71,15 +67,16 @@ public class RedisRepository implements CommonRepository {
                     .opsForList()
                     .rightPushAll(KEY_PREFIX_009_01 + k, v);
         });
+//        redisWatchingRepository.saveAll(map);
     }
 
     /**
      * cHjdongNo로 그룹화
      */
-    private Map<String, List<String>> groupBycHjdongNo(String cHjdongNo, List<WatchingDto1> dtos) {
+    private Map<String, List<String>> groupBycHjdongNo(String cHjdongNo, List<WatchingDto1> watchingDto1List) {
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, List<String>> map = new HashMap<>();
-        dtos.forEach(dto -> {
+        watchingDto1List.forEach(dto -> {
             if (!map.containsKey(cHjdongNo)) {
                 map.put(cHjdongNo, new ArrayList<>());
             }
@@ -96,10 +93,10 @@ public class RedisRepository implements CommonRepository {
     /**
      * saId, pIdxSa로 그룹화
      */
-    private Map<String, List<String>> groupByCSaIdAndPIdxSa(String cSaId, int pIdxSa, List<WatchingDto2> watchingDto2s) {
+    private Map<String, List<String>> groupByCSaIdAndPIdxSa(String cSaId, int pIdxSa, List<WatchingDto2> watchingDto2List) {
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, List<String>> map = new HashMap<>();
-        watchingDto2s.forEach(dto -> {
+        watchingDto2List.forEach(dto -> {
             String key = cSaId + ":" + pIdxSa;
             if (!map.containsKey(key)) {
                 map.put(key, new ArrayList<>());

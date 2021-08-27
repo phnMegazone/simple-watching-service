@@ -2,13 +2,8 @@ package com.fleta.watchingservice.adapter.persistence;
 
 import com.fleta.watchingservice.domain.dto.WatchingDto1;
 import com.fleta.watchingservice.domain.dto.WatchingDto2;
-import com.fleta.watchingservice.port.CommonRepository;
 import org.qlrm.mapper.JpaResultMapper;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Primary;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
