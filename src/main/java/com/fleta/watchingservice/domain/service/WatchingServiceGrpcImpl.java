@@ -1,4 +1,4 @@
-package com.fleta.watchingservice.grpc.server;
+package com.fleta.watchingservice.domain.service;
 
 import com.fleta.watchingservice.domain.dto.WatchingDto1;
 import com.fleta.watchingservice.domain.dto.WatchingDto2;
@@ -13,12 +13,12 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class WatchingService extends WatchingServiceGrpc.WatchingServiceImplBase {
+public class WatchingServiceGrpcImpl extends WatchingServiceGrpc.WatchingServiceImplBase {
 
     private final CommonRepository commonRepository;
 
     @Autowired
-    public WatchingService(CommonRepository commonRepository) {
+    public WatchingServiceGrpcImpl(CommonRepository commonRepository) {
         this.commonRepository = commonRepository;
     }
 

@@ -7,7 +7,6 @@ import io.grpc.stub.StreamObserver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,9 +44,5 @@ public class WatchingController {
         List<WatchingOutput2> watchingOutput2List = watchingService.nxvod211TobeSql01801(watchingInput2);
         return watchingOutput2List.stream().map(o ->
             String.format("%s : %s\n", o.getAdiAlbumId(), o.getWatchDate())).collect(Collectors.toList());
-    }
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello";
     }
 }

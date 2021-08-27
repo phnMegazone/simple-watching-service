@@ -1,4 +1,5 @@
-package com.fleta.watchingservice.grpc.server;
+package com.fleta.watchingservice.adapter.grpc.server;
+import com.fleta.watchingservice.domain.service.WatchingServiceGrpcImpl;
 import com.fleta.watchingservice.port.CommonRepository;
 import io.grpc.ServerBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +28,7 @@ public class WatchingServer implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         log.info("host {} {}", host, port);
         ServerBuilder.forPort(port)
-            .addService(new com.fleta.watchingservice.grpc.server.WatchingService(commonRepository))
+            .addService(new WatchingServiceGrpcImpl(commonRepository))
             .build().start();
     }
 }
