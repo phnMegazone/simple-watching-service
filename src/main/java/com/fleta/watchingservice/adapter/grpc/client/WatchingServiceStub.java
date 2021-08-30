@@ -1,4 +1,4 @@
-package com.fleta.watchingservice.grpc.server;
+package com.fleta.watchingservice.adapter.grpc.client;
 
 
 import com.fleta.watchingservice.grpc.common.WatchingServiceGrpc;
