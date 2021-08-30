@@ -1,4 +1,4 @@
-# LGU+ Media Service :: Contents 조회 서비스
+# LGU+ Watching Service
 
 
 # Hexagonal Architecture
@@ -24,7 +24,6 @@ This pattern allows to isolate the core logic of application from outside concer
 
 ![Img 03](./pictures/img_03.png "Hexagonal Architecture")
 
-+ Apply `ConnectionPool` for Redis
 + Good performance
 
 ![Img 04](./pictures/img_04.png "Hexagonal Architecture")
@@ -40,56 +39,26 @@ The project package structure also reflects the service architecture.
 ## 1) domain
 The domain is the core of the hexagon, containing primary business logic
 
-### 1.1) Model
-- com.lguplus.fleta.domain.model.*
-- com.lguplus.fleta.domain.dto.*
-
-### 1.2) Service Implementation
-- com.lguplus.fleta.domain.serviceimpl.*
+- com.fleta.watchingservice.domain.*
 
 ## 2) adapters
 Adapters are either external APIs of your application or clients to other systems. They translate the interfaces of external systems (e.g. a search index or a file server API) to the interfaces required or exposed by the domain. Those interfaces are called ports.
 
-### 2.1) Message Broker
-The package contains implementations of `Message Broker`
-- com.lguplus.fleta.adapters.messagebroker.*
-
-### 2.2.) Persistence / Postgres
-In our example, SQL is the secondary adapter.
-
-- com.lguplus.fleta.adapters.repositoryimpl.*
-
-### 2.3) APIs
-- com.lguplus.fleta.adapters.rest.*
-
-### 2.4) WebClient
-The package contains implementation for getting data from external RESTful APIs.
-
-- com.lguplus.fleta.adapters.webclient.*
-
-### 2.5) Redis
-Describe how to apply `Redis` into this project
-- 구현
-    - com.lguplus.fleta.config.DefaultRedisCacheConfiguration
-        - @EnableCaching으로 Cache 사용을 활성화 합니다. cacheManager의 configuration을 통해 캐시 정책을 변경 합니다.
-    - @Cachable
-        - Redis에 캐싱된 데이터가 있으면 반환하고, 없으면 DB에서 조회한다음 Redis에 캐시합니다. 어노테이션은 Method나 Type에 세팅할 수 있고 런타임에 수행됩니다.
+- com.fleta.watchingservice.adapter.*
 
 ## 3) ports
-
 An input port (driving port) lets the application core to expose the functionality to the outside of the world.
 
 An output port (driven port) is another type of interface that is used by the application core to reach things outside of itself (like getting some data from a database).
 
-### 3.1) Message Broker
-- com.lguplus.fleta.ports.messagebroker.*
-
-### 3.2) Persistence / Postgres
-- com.lguplus.fleta.ports.repository.
-
-### 3.3) Service
-- com.lguplus.fleta.ports.service.*
-
+### *) Redis
+Describe how to apply `Redis` into this project
+- 구현
+    - com.fleta.watchingservice.config.DefaultRedisCacheConfiguration
+        - @EnableCaching으로 Cache 사용을 활성화 합니다. cacheManager의 configuration을 통해 캐시 정책을 변경 합니다.
+    - @Cachable
+        - Redis에 캐싱된 데이터가 있으면 반환하고, 없으면 DB에서 조회한다음 Redis에 캐시합니다. 어노테이션은 Method나 Type에 세팅할 수 있고 런타임에 수행됩니다.
+    
 ## References
 - https://medium.com/javarevisited/hexagonal-architecture-in-java-9031d3570d15
 - https://www.expatdev.com/posts/hexagonal-architecture-in-java/
