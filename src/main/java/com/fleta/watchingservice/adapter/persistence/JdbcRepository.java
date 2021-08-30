@@ -2,7 +2,7 @@ package com.fleta.watchingservice.adapter.persistence;
 
 import com.fleta.watchingservice.domain.dto.WatchingDto1;
 import com.fleta.watchingservice.domain.dto.WatchingDto2;
-import com.fleta.watchingservice.port.CommonRepository;
+import com.fleta.watchingservice.port.WatchingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Primary;
@@ -12,7 +12,7 @@ import java.util.List;
 @Repository("jdbcRepository")
 @Primary
 @ConditionalOnProperty(name="repository-type", havingValue = "jdbc")
-public class JdbcRepository implements CommonRepository {
+public class JdbcRepository implements WatchingRepository {
 
     private final JdbcWatchingRepository jdbcWatchingRepository;
 

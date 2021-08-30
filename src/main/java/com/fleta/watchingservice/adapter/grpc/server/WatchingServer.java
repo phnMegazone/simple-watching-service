@@ -1,6 +1,6 @@
 package com.fleta.watchingservice.adapter.grpc.server;
 import com.fleta.watchingservice.domain.service.WatchingServiceGrpcImpl;
-import com.fleta.watchingservice.port.CommonRepository;
+import com.fleta.watchingservice.port.WatchingRepository;
 import io.grpc.ServerBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,17 +18,17 @@ public class WatchingServer implements ApplicationRunner {
     @Value("${grpc.host}")
     public String host;
 
-    private final CommonRepository commonRepository;
+    private final WatchingRepository watchingRepository;
 
-    public WatchingServer(CommonRepository commonRepository) {
-        this.commonRepository = commonRepository;
+    public WatchingServer(WatchingRepository watchingRepository) {
+        this.watchingRepository = watchingRepository;
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
         log.info("host {} {}", host, port);
         ServerBuilder.forPort(port)
-            .addService(new WatchingServiceGrpcImpl(commonRepository))
+            .addService(new WatchingServiceGrpcImpl(watchingRepository))
             .build().start();
     }
 }

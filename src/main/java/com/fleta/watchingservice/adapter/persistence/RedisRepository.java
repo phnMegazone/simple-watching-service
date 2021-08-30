@@ -2,14 +2,14 @@ package com.fleta.watchingservice.adapter.persistence;
 
 import com.fleta.watchingservice.domain.dto.WatchingDto1;
 import com.fleta.watchingservice.domain.dto.WatchingDto2;
-import com.fleta.watchingservice.port.CommonRepository;
+import com.fleta.watchingservice.port.WatchingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class RedisRepository implements CommonRepository {
+public class RedisRepository implements WatchingRepository {
 
     private final JdbcWatchingRepository jdbcWatchingRepository;
 

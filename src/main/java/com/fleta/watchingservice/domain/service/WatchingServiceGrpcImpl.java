@@ -3,7 +3,7 @@ package com.fleta.watchingservice.domain.service;
 import com.fleta.watchingservice.domain.dto.WatchingDto1;
 import com.fleta.watchingservice.domain.dto.WatchingDto2;
 import com.fleta.watchingservice.grpc.common.*;
-import com.fleta.watchingservice.port.CommonRepository;
+import com.fleta.watchingservice.port.WatchingRepository;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,11 @@ import java.util.List;
 @Service
 public class WatchingServiceGrpcImpl extends WatchingServiceGrpc.WatchingServiceImplBase {
 
-    private final CommonRepository commonRepository;
+    private final WatchingRepository watchingRepository;
 
     @Autowired
-    public WatchingServiceGrpcImpl(CommonRepository commonRepository) {
-        this.commonRepository = commonRepository;
+    public WatchingServiceGrpcImpl(WatchingRepository watchingRepository) {
+        this.watchingRepository = watchingRepository;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class WatchingServiceGrpcImpl extends WatchingServiceGrpc.WatchingService
     }
     private List<WatchingDto1> getWatchingDto1Condition(WatchingInput1 r) {
         String cHjdongNo = r.getCHjdongNo();
-        return commonRepository.nxvod211TobeSql00901(cHjdongNo);
+        return watchingRepository.nxvod211TobeSql00901(cHjdongNo);
     }
 
     @Override
@@ -48,6 +48,6 @@ public class WatchingServiceGrpcImpl extends WatchingServiceGrpc.WatchingService
     private List<WatchingDto2> getPvsCustListCondition(WatchingInput2 r) {
         String cSaId = r.getCSaId();
         int pIdxSa = r.getPIdxSa();
-        return commonRepository.nxvod211TobeSql01801(cSaId, pIdxSa);
+        return watchingRepository.nxvod211TobeSql01801(cSaId, pIdxSa);
     }
 }
